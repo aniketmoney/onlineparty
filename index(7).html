@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Crush ✨</title>
+  <style>
+    :root{
+      --bg1:#fff7fb;
+      --bg2:#f7f0ff;
+      --pink:#ff6fae;
+      --pink2:#ff9bc6;
+      --purple:#9b7cff;
+      --text:#3f3342;
+      --muted:#7a6a80;
+      --card:rgba(255,255,255,.78);
+      --shadow:0 20px 55px rgba(114,79,120,.14);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,167,206,.28), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(177,149,255,.22), transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    button{font:inherit}
+    .hidden{display:none!important}
+
+    .floating{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+    }
+
+    .floaty{
+      position:absolute;
+      opacity:.45;
+      animation:drift linear infinite;
+      filter:drop-shadow(0 5px 12px rgba(0,0,0,.05));
+    }
+
+    @keyframes drift{
+      from{transform:translateY(110vh) rotate(0deg)}
+      to{transform:translateY(-15vh) rotate(360deg)}
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+      width:min(940px,92vw);
+      margin:0 auto;
+      padding:28px 0 80px;
+    }
+
+    .hero{
+      min-height:96vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+    }
+
+    .hero-card,
+    .section-card{
+      width:100%;
+      background:var(--card);
+      backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+    }
+
+    .hero-card{
+      max-width:680px;
+      padding:48px 26px 36px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .mini-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#fff;
+      box-shadow:0 10px 25px rgba(104,71,115,.08);
+      font-size:.9rem;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(2.3rem,8vw,5rem);
+      margin:.15em 0 .12em;
+      line-height:.95;
+      letter-spacing:-.055em;
+    }
+
+    .gradient-text{
+      background:linear-gradient(90deg,var(--pink),var(--purple));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .lead{
+      font-size:clamp(1rem,3vw,1.18rem);
+      line-height:1.75;
+      color:var(--muted);
+      max-width:540px;
+      margin:18px auto 0;
+    }
+
+    .small{
+      font-size:.88rem;
+      color:#95859a;
+      margin-top:10px;
+    }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding:14px 22px;
+      transition:.22s ease;
+      box-shadow:0 12px 24px rgba(122,79,129,.12);
+      user-select:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn:active{transform:scale(.97)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--pink),var(--purple));
+    }
+
+    .btn-soft{
+      color:var(--text);
+      background:#fff;
+    }
+
+    .hero-buttons{
+      margin-top:28px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      min-height:58px;
+    }
+
+    .no-btn{
+      position:relative;
+      z-index:10;
+      background:#fff;
+      color:#5a4a60;
+    }
+
+    .tiny-note{
+      margin-top:22px;
+      font-size:.82rem;
+      color:#9a8ca0;
+    }
+
+    .section{
+      margin-top:34px;
+      opacity:0;
+      transform:translateY(24px);
+      transition:.6s ease;
+    }
+
+    .section.show{
+      opacity:1;
+      transform:none;
+    }
+
+    .section-card{
+      padding:28px;
+    }
+
+    .section-title{
+      margin:0;
+      font-size:clamp(1.55rem,5vw,2.45rem);
+      letter-spacing:-.035em;
+    }
+
+    .section-sub{
+      color:var(--muted);
+      line-height:1.65;
+      margin:8px 0 0;
+    }
+
+    .food-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .food{
+      background:#fff;
+      border:2px solid transparent;
+      border-radius:24px;
+      padding:20px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:.25s ease;
+      box-shadow:0 12px 28px rgba(126,85,132,.08);
+    }
+
+    .food:hover{
+      transform:translateY(-5px) rotate(-1deg);
+      border-color:#ffd0e4;
+    }
+
+    .food.selected{
+      border-color:var(--pink2);
+      background:linear-gradient(180deg,#fff,#fff4f9);
+      transform:translateY(-4px);
+    }
+
+    .food-emoji{
+      font-size:3rem;
+      display:block;
+      margin-bottom:7px;
+    }
+
+    .food-name{font-weight:800}
+    .food-desc{font-size:.83rem;color:var(--muted);margin-top:5px}
+
+    .result-box{
+      margin-top:18px;
+      border-radius:20px;
+      padding:16px 18px;
+      background:rgba(255,255,255,.9);
+      border:1px dashed #f3b4cf;
+      line-height:1.6;
+    }
+
+    .progress-wrap{
+      height:10px;
+      background:#f1e8f4;
+      border-radius:999px;
+      overflow:hidden;
+      margin:22px 0 10px;
+    }
+
+    .progress{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--pink),var(--purple));
+      transition:.7s ease;
+    }
+
+    .party-stage{
+      text-align:center;
+      padding:18px 8px 8px;
+    }
+
+    .plate{
+      font-size:4.6rem;
+      min-height:88px;
+      display:grid;
+      place-items:center;
+      animation:bob 1.8s ease-in-out infinite;
+    }
+
+    @keyframes bob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+
+    .choices{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .choice{
+      width:100%;
+      text-align:left;
+      border:0;
+      border-radius:18px;
+      padding:15px 16px;
+      cursor:pointer;
+      background:#fff;
+      color:var(--text);
+      box-shadow:0 10px 24px rgba(126,85,132,.07);
+      transition:.2s ease;
+    }
+
+    .choice:hover{transform:translateX(5px)}
+
+    .reply{
+      min-height:58px;
+      margin-top:16px;
+      padding:15px 16px;
+      border-radius:18px;
+      background:#fff8fc;
+      color:#604f66;
+      line-height:1.55;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .note-card{
+      min-height:150px;
+      perspective:1000px;
+      cursor:pointer;
+    }
+
+    .note-inner{
+      width:100%;
+      height:100%;
+      min-height:150px;
+      position:relative;
+      transform-style:preserve-3d;
+      transition:.65s;
+    }
+
+    .note-card.open .note-inner{transform:rotateY(180deg)}
+
+    .note-face{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      border-radius:22px;
+      backface-visibility:hidden;
+      box-shadow:0 12px 28px rgba(126,85,132,.08);
+      text-align:center;
+    }
+
+    .note-front{
+      background:#fff;
+      font-weight:800;
+    }
+
+    .note-back{
+      background:linear-gradient(135deg,#fff1f7,#f7f0ff);
+      transform:rotateY(180deg);
+      line-height:1.55;
+    }
+
+    .envelope{
+      margin:20px auto 0;
+      max-width:460px;
+      border-radius:24px;
+      padding:28px 22px;
+      text-align:center;
+      background:linear-gradient(135deg,#fff,#fff4fa);
+      border:1px solid #f3d2e1;
+      box-shadow:0 16px 35px rgba(127,84,132,.09);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .envelope:hover{transform:translateY(-4px)}
+    .envelope-icon{font-size:3.2rem}
+
+    .secret{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:.7s ease;
+      color:#5f4d64;
+      line-height:1.75;
+    }
+
+    .envelope.open .secret{
+      max-height:240px;
+      opacity:1;
+      margin-top:14px;
+    }
+
+    .final{
+      min-height:70vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+    }
+
+    .big-emoji{font-size:4.5rem}
+
+    .footer{
+      text-align:center;
+      padding:38px 0 10px;
+      color:#9a8ca0;
+      font-size:.85rem;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translate(-50%,120px);
+      z-index:100;
+      background:#332a36;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:999px;
+      box-shadow:0 12px 25px rgba(0,0,0,.18);
+      transition:.35s ease;
+      text-align:center;
+      max-width:88vw;
+    }
+
+    .toast.show{transform:translate(-50%,0)}
+
+    .confetti{
+      position:fixed;
+      top:-20px;
+      z-index:99;
+      pointer-events:none;
+      animation:fall 2.6s linear forwards;
+      font-size:18px;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:.95;
+      }
+    }
+
+    .wiggle{animation:wiggle .6s ease}
+    @keyframes wiggle{
+      0%,100%{transform:rotate(0)}
+      25%{transform:rotate(-3deg)}
+      75%{transform:rotate(3deg)}
+    }
+
+    @media (max-width:680px){
+      .page{width:min(94vw,620px)}
+      .hero-card{padding:40px 18px 30px}
+      .section-card{padding:22px 17px}
+      .food-grid{grid-template-columns:1fr}
+      .food{
+        display:grid;
+        grid-template-columns:58px 1fr;
+        column-gap:10px;
+        text-align:left;
+        align-items:center;
+      }
+      .food-emoji{
+        grid-row:1 / 3;
+        margin:0;
+      }
+      .food-desc{margin-top:2px}
+      .cards{grid-template-columns:1fr}
+      .hero-buttons{
+        align-items:center;
+        min-height:118px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floating" id="floating"></div>
+
+  <main class="page">
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="mini-pill">✨ tiny internet surprise</div>
+
+        <h1>Hey, <span class="gradient-text">Crush</span> 👀</h1>
+
+        <p class="lead">
+          You asked for an online party.<br>
+          I may have taken that request a little too seriously.
+        </p>
+
+        <p class="small">No refunds. The developer has already committed.</p>
+
+        <h2 style="margin-top:30px;">So... party with me?</h2>
+
+        <div class="hero-buttons" id="partyQuestion">
+          <button class="btn btn-primary" id="yesBtn">YES, obviously ✨</button>
+          <button class="btn no-btn" id="noBtn">No 😌</button>
+        </div>
+
+        <div class="tiny-note">
+          P.S. One of these buttons is slightly less cooperative.
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="partySection">
+      <div class="section-card">
+        <div class="mini-pill">🎉 online party unlocked</div>
+        <h2 class="section-title">Welcome to our extremely serious food ceremony.</h2>
+        <p class="section-sub">
+          You requested three things. I remembered all three because apparently
+          I am a very responsible party organizer.
+        </p>
+
+        <div class="food-grid">
+          <div class="food" data-food="Pizza" data-emoji="🍕">
+            <span class="food-emoji">🍕</span>
+            <div class="food-name">Pizza</div>
+            <div class="food-desc">Classic. Reliable. Zero arguments.</div>
+          </div>
+
+          <div class="food" data-food="Manchurian" data-emoji="🥡">
+            <span class="food-emoji">🥡</span>
+            <div class="food-name">Manchurian</div>
+            <div class="food-desc">Slightly chaotic. Good choice.</div>
+          </div>
+
+          <div class="food" data-food="Pastry" data-emoji="🍰">
+            <span class="food-emoji">🍰</span>
+            <div class="food-name">Pastry</div>
+            <div class="food-desc">Sweet. No hidden meaning. Probably.</div>
+          </div>
+        </div>
+
+        <div class="result-box" id="foodResult">
+          Pick the first thing we should "eat" 👀
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress" id="partyProgress"></div>
+        </div>
+        <div class="small" id="progressText">Party status: waiting for Crush.</div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="questionSection">
+      <div class="section-card">
+        <div class="mini-pill">🤨 highly scientific question</div>
+        <h2 class="section-title">Why do you think I made this?</h2>
+        <p class="section-sub">Choose carefully. Your answer may be used against you.</p>
+
+        <div class="choices">
+          <button class="choice" data-answer="bored">A. You were bored.</button>
+          <button class="choice" data-answer="party">B. Because I asked for an online party.</button>
+          <button class="choice" data-answer="other">C. There is probably another reason 👀</button>
+          <button class="choice" data-answer="coding">D. You just wanted to show off your coding.</button>
+        </div>
+
+        <div class="reply" id="quizReply">I am patiently judging your answer.</div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="cardsSection">
+      <div class="section-card">
+        <div class="mini-pill">💌 tap to inspect</div>
+        <h2 class="section-title">A few completely normal observations.</h2>
+        <p class="section-sub">
+          Definitely not compliments. Please do not let them increase your ego.
+        </p>
+
+        <div class="cards">
+          <div class="note-card">
+            <div class="note-inner">
+              <div class="note-face note-front">01<br><span class="small">tap me</span></div>
+              <div class="note-face note-back">
+                You somehow make normal conversations way less boring.
+              </div>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <div class="note-inner">
+              <div class="note-face note-front">02<br><span class="small">tap me</span></div>
+              <div class="note-face note-back">
+                Your smile is annoyingly easy to notice.
+              </div>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <div class="note-inner">
+              <div class="note-face note-front">03<br><span class="small">tap me</span></div>
+              <div class="note-face note-back">
+                You have a weird talent for improving the mood without really trying.
+              </div>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <div class="note-inner">
+              <div class="note-face note-front">04<br><span class="small">tap me</span></div>
+              <div class="note-face note-back">
+                That's enough praise for one website. Stay humble, Crush.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="secretSection">
+      <div class="section-card">
+        <div class="mini-pill">🔐 suspicious area</div>
+        <h2 class="section-title">You found something you weren't supposed to find.</h2>
+        <p class="section-sub">Well... since you're already here.</p>
+
+        <div class="envelope" id="envelope">
+          <div class="envelope-icon">💌</div>
+          <strong>Tap to open the tiny secret</strong>
+
+          <div class="secret">
+            Some people enter your life very normally and then somehow become
+            a little more important than expected.<br><br>
+            Anyway... enjoy your pastry. 😌
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden final" id="finalSection">
+      <div class="section-card" style="max-width:650px;">
+        <div class="big-emoji">🌷</div>
+        <h2 class="section-title">Okay. That's actually it.</h2>
+        <p class="section-sub" id="finalText">
+          What were you expecting? 👀
+        </p>
+
+        <button class="btn btn-primary" id="nothingBtn" style="margin-top:20px;">
+          Nothing 😌
+        </button>
+
+        <div class="reply hidden" id="lastReply" style="margin-top:20px;">
+          Good.<br>
+          <span class="small">...because neither was I.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Made with HTML, CSS, JavaScript<br>
+      and questionable decision-making.
+    </footer>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const toast = document.getElementById("toast");
+
+    let noAttempts = 0;
+    let selectedFoods = [];
+
+    const funnyNoLines = [
+      "Nice try 😭",
+      "That button seems shy.",
+      "Technical issue. Very unfortunate.",
+      "No is currently unavailable.",
+      "Developer says: absolutely not.",
+      "Maybe try the other button 👀"
+    ];
+
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function moveNoButton(){
+      noAttempts++;
+      const parent = document.getElementById("partyQuestion");
+      const rect = parent.getBoundingClientRect();
+
+      noBtn.style.position = "absolute";
+
+      const maxX = Math.max(10, rect.width - noBtn.offsetWidth - 10);
+      const maxY = Math.max(35, rect.height - noBtn.offsetHeight + 70);
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      showToast(funnyNoLines[(noAttempts - 1) % funnyNoLines.length]);
+
+      if(noAttempts === 4){
+        yesBtn.textContent = "Fine. Just press YES 😭";
+      }
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+    noBtn.addEventListener("touchstart", (e)=>{
+      e.preventDefault();
+      moveNoButton();
+    }, {passive:false});
+
+    yesBtn.addEventListener("click", ()=>{
+      confettiBurst();
+      showToast("Correct answer. Party unlocked 🎉");
+
+      const section = document.getElementById("partySection");
+      section.classList.remove("hidden");
+      setTimeout(()=>{
+        section.classList.add("show");
+        section.scrollIntoView({behavior:"smooth", block:"start"});
+      }, 80);
+    });
+
+    const foodMessages = {
+      Pizza: [
+        "Excellent choice. One virtual slice reserved for you 🍕",
+        "Pizza first? Respectable decision.",
+        "Okay, but I am stealing exactly one slice."
+      ],
+      Manchurian: [
+        "Manchurian it is. Very elite online-party behavior 🥡",
+        "Good choice. The chef approves.",
+        "Spicy choice. I expected nothing less 👀"
+      ],
+      Pastry: [
+        "Pastry first? Someone has priorities 🍰",
+        "Sweet choice. And no, that sentence has no hidden meaning.",
+        "One pastry for Crush. The bill is obviously on me."
+      ]
+    };
+
+    document.querySelectorAll(".food").forEach(card=>{
+      card.addEventListener("click", ()=>{
+        const food = card.dataset.food;
+        const emoji = card.dataset.emoji;
+
+        card.classList.add("selected");
+
+        if(!selectedFoods.includes(food)){
+          selectedFoods.push(food);
+        }
+
+        const msgs = foodMessages[food];
+        document.getElementById("foodResult").innerHTML =
+          `<strong>${emoji} ${food} selected!</strong><br>${msgs[Math.floor(Math.random()*msgs.length)]}`;
+
+        const percent = Math.min(100, selectedFoods.length * 34);
+        document.getElementById("partyProgress").style.width = percent + "%";
+
+        if(selectedFoods.length === 1){
+          document.getElementById("progressText").textContent =
+            "Party status: officially started ✨";
+        } else if(selectedFoods.length === 2){
+          document.getElementById("progressText").textContent =
+            "Party status: getting suspiciously good.";
+        } else {
+          document.getElementById("progressText").textContent =
+            "Party status: complete. Zero calories consumed 😌";
+          confettiBurst();
+
+          unlockSection("questionSection", 500);
+        }
+      });
+    });
+
+    function unlockSection(id, delay=0){
+      const el = document.getElementById(id);
+      setTimeout(()=>{
+        el.classList.remove("hidden");
+        setTimeout(()=>el.classList.add("show"),60);
+      }, delay);
+    }
+
+    document.querySelectorAll(".choice").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const answer = btn.dataset.answer;
+        let text = "";
+
+        if(answer === "bored"){
+          text = "Rude. I could have been bored without writing 300+ lines of code 😭";
+        }
+        if(answer === "party"){
+          text = "Technically correct. This is your party. I am merely the unpaid developer.";
+        }
+        if(answer === "other"){
+          text = "Interesting choice... very interesting. 👀";
+        }
+        if(answer === "coding"){
+          text = "Maybe 20% coding. The remaining 80% is classified information.";
+        }
+
+        document.getElementById("quizReply").textContent = text;
+        btn.classList.add("wiggle");
+
+        unlockSection("cardsSection", 650);
+        unlockSection("secretSection", 1250);
+        unlockSection("finalSection", 1850);
+      });
+    });
+
+    document.querySelectorAll(".note-card").forEach(card=>{
+      card.addEventListener("click", ()=>{
+        card.classList.toggle("open");
+      });
+    });
+
+    document.getElementById("envelope").addEventListener("click", function(){
+      this.classList.toggle("open");
+      if(this.classList.contains("open")){
+        showToast("Secret successfully leaked 💌");
+      }
+    });
+
+    document.getElementById("nothingBtn").addEventListener("click", ()=>{
+      const reply = document.getElementById("lastReply");
+      reply.classList.remove("hidden");
+      confettiBurst(24);
+      showToast("Good answer 😌");
+    });
+
+    function confettiBurst(count=36){
+      const pieces = ["✨","💗","🌷","⭐","🎉","🍕","🍰"];
+      for(let i=0;i<count;i++){
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.textContent = pieces[Math.floor(Math.random()*pieces.length)];
+        c.style.left = Math.random()*100 + "vw";
+        c.style.animationDuration = (1.8 + Math.random()*1.8) + "s";
+        c.style.fontSize = (14 + Math.random()*14) + "px";
+        c.style.transform = `rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3800);
+      }
+    }
+
+    function createFloaties(){
+      const symbols = ["✦","♡","✿","⋆","✨"];
+      const container = document.getElementById("floating");
+
+      for(let i=0;i<22;i++){
+        const span = document.createElement("span");
+        span.className = "floaty";
+        span.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+        span.style.left = Math.random()*100 + "%";
+        span.style.fontSize = (12 + Math.random()*18) + "px";
+        span.style.animationDuration = (10 + Math.random()*15) + "s";
+        span.style.animationDelay = (-Math.random()*18) + "s";
+        container.appendChild(span);
+      }
+    }
+
+    createFloaties();
+
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, {threshold:.12});
+
+    document.querySelectorAll(".section").forEach(sec=>observer.observe(sec));
+  </script>
+</body>
+</html>
