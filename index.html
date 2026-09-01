@@ -450,9 +450,200 @@
       75%{transform:rotate(3deg)}
     }
 
+
+    /* --- Cute teddy additions --- */
+    .teddy-corner{
+      position:absolute;
+      width:118px;
+      height:118px;
+      right:-18px;
+      bottom:-8px;
+      transform:rotate(-7deg);
+      opacity:.98;
+      filter:drop-shadow(0 14px 18px rgba(126,85,132,.12));
+      pointer-events:none;
+    }
+
+    .teddy{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    .teddy .ear,
+    .teddy .head,
+    .teddy .body,
+    .teddy .arm{
+      position:absolute;
+      background:#c99369;
+      border:3px solid rgba(83,55,42,.08);
+    }
+
+    .teddy .ear{
+      width:34px;height:34px;border-radius:50%;
+      top:7px;
+    }
+    .teddy .ear.left{left:15px}
+    .teddy .ear.right{right:15px}
+    .teddy .ear:after{
+      content:"";
+      position:absolute;inset:8px;
+      border-radius:50%;
+      background:#eab99a;
+    }
+    .teddy .head{
+      width:78px;height:70px;
+      left:20px;top:18px;
+      border-radius:45% 45% 48% 48%;
+      z-index:2;
+    }
+    .teddy .body{
+      width:70px;height:58px;
+      left:24px;bottom:2px;
+      border-radius:48% 48% 38% 38%;
+    }
+    .teddy .arm{
+      width:22px;height:48px;
+      top:68px;border-radius:20px;
+      z-index:3;
+    }
+    .teddy .arm.left{left:18px;transform:rotate(22deg)}
+    .teddy .arm.right{right:18px;transform:rotate(-22deg)}
+    .teddy .eye{
+      position:absolute;
+      width:7px;height:8px;border-radius:50%;
+      background:#43322e;top:28px;z-index:5;
+    }
+    .teddy .eye.left{left:22px}
+    .teddy .eye.right{right:22px}
+    .teddy .muzzle{
+      position:absolute;width:34px;height:25px;
+      border-radius:50%;background:#f0cfb8;
+      left:22px;top:39px;z-index:4;
+    }
+    .teddy .nose{
+      position:absolute;width:11px;height:8px;border-radius:50%;
+      background:#49352f;left:34px;top:43px;z-index:6;
+    }
+    .teddy .smile{
+      position:absolute;width:16px;height:9px;
+      border-bottom:2px solid #49352f;
+      border-radius:0 0 50% 50%;
+      left:31px;top:50px;z-index:6;
+    }
+    .teddy .heart{
+      position:absolute;left:50%;bottom:24px;transform:translateX(-50%);
+      font-size:19px;z-index:8;
+      animation:pulseHeart 1.4s ease-in-out infinite;
+    }
+    @keyframes pulseHeart{50%{transform:translateX(-50%) scale(1.18)}}
+
+    .teddy-peek{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-top:20px;
+      padding:14px 16px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#fff8fc,#fff);
+      border:1px solid #f2d7e3;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .teddy-peek:hover{transform:translateY(-3px)}
+    .teddy-mini{font-size:2.8rem;transition:.25s ease}
+    .teddy-peek:hover .teddy-mini{transform:rotate(-9deg) scale(1.08)}
+    .teddy-speech{color:#66546c;line-height:1.5}
+
+    .hug-meter{
+      margin-top:20px;
+      background:#fff;
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(126,85,132,.07);
+    }
+    .hug-track{
+      height:14px;
+      border-radius:999px;
+      background:#f1e8f4;
+      overflow:hidden;
+      margin:12px 0;
+    }
+    .hug-fill{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,#ff8ab9,#a986ff);
+      transition:.45s ease;
+    }
+    .hug-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    .gift-box{
+      margin:22px auto 0;
+      width:150px;height:130px;
+      position:relative;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+    .gift-box:hover{transform:translateY(-5px) rotate(-1deg)}
+    .gift-base{
+      position:absolute;left:15px;right:15px;bottom:0;height:90px;
+      border-radius:16px;background:linear-gradient(135deg,#ff8fbe,#c59bff);
+      box-shadow:0 16px 30px rgba(137,84,151,.16);
+    }
+    .gift-lid{
+      position:absolute;left:7px;right:7px;top:24px;height:28px;
+      border-radius:12px;background:linear-gradient(135deg,#ff78ac,#b68cff);
+      z-index:3;transition:.45s ease;
+    }
+    .gift-ribbon-v{
+      position:absolute;left:66px;top:24px;width:18px;height:106px;
+      background:#fff0f7;z-index:4;border-radius:10px;
+    }
+    .gift-ribbon-h{
+      position:absolute;left:7px;right:7px;top:29px;height:18px;
+      background:#fff0f7;z-index:4;border-radius:10px;
+    }
+    .gift-bow{position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:40px;z-index:5}
+    .gift-box.open .gift-lid{transform:translateY(-28px) rotate(-8deg)}
+    .gift-surprise{
+      max-height:0;opacity:0;overflow:hidden;
+      transition:.6s ease;
+      text-align:center;color:#5f4d64;line-height:1.6;
+    }
+    .gift-surprise.show{max-height:180px;opacity:1;margin-top:12px}
+
+    .paw{
+      position:fixed;
+      pointer-events:none;
+      z-index:90;
+      font-size:16px;
+      opacity:.75;
+      animation:pawFade .9s ease forwards;
+    }
+    @keyframes pawFade{
+      0%{transform:scale(.6);opacity:0}
+      35%{transform:scale(1);opacity:.9}
+      100%{transform:translateY(-18px) scale(.9);opacity:0}
+    }
+
+    .secret-dot{
+      display:inline-grid;
+      place-items:center;
+      width:26px;height:26px;
+      border-radius:50%;
+      background:#fff;
+      box-shadow:0 8px 18px rgba(126,85,132,.1);
+      cursor:pointer;
+      user-select:none;
+      margin-left:6px;
+      transition:.2s ease;
+    }
+    .secret-dot:hover{transform:scale(1.08)}
+
     @media (max-width:680px){
       .page{width:min(94vw,620px)}
       .hero-card{padding:40px 18px 30px}
+      .teddy-corner{width:92px;height:92px;right:-8px;bottom:-2px;opacity:.9}
       .section-card{padding:22px 17px}
       .food-grid{grid-template-columns:1fr}
       .food{
@@ -485,7 +676,21 @@
       <div class="hero-card">
         <div class="mini-pill">✨ tiny internet surprise</div>
 
-        <h1>Hey, <span class="gradient-text">Crush</span> 👀</h1>
+        <div class="teddy-corner" aria-hidden="true">
+          <div class="teddy">
+            <div class="ear left"></div><div class="ear right"></div>
+            <div class="head">
+              <div class="eye left"></div><div class="eye right"></div>
+              <div class="muzzle"></div><div class="nose"></div><div class="smile"></div>
+            </div>
+            <div class="body"></div>
+            <div class="arm left"></div><div class="arm right"></div>
+            <div class="heart">💗</div>
+          </div>
+        </div>
+
+
+        <h1>Hey, <span class="gradient-text">Moti</span> 👀</h1>
 
         <p class="lead">
           You asked for an online party.<br>
@@ -540,10 +745,29 @@
           Pick the first thing we should "eat" 👀
         </div>
 
+
+        <div class="teddy-peek" id="teddyPeek">
+          <div class="teddy-mini">🧸</div>
+          <div class="teddy-speech">
+            <strong>Teddy has an opinion.</strong><br>
+            Tap him after choosing some food.
+          </div>
+        </div>
+
+        <div class="hug-meter">
+          <strong>Emergency teddy hug meter 🧸</strong>
+          <div class="small">Tap until the teddy decides the party is sufficiently cute.</div>
+          <div class="hug-track"><div class="hug-fill" id="hugFill"></div></div>
+          <div class="hug-actions">
+            <button class="btn btn-soft" id="hugBtn">Give teddy a hug</button>
+            <span class="small" id="hugText" style="align-self:center;">0% emotionally supported</span>
+          </div>
+        </div>
+
         <div class="progress-wrap">
           <div class="progress" id="partyProgress"></div>
         </div>
-        <div class="small" id="progressText">Party status: waiting for Crush.</div>
+        <div class="small" id="progressText">Party status: waiting for Moti.</div>
       </div>
     </section>
 
@@ -604,10 +828,36 @@
             <div class="note-inner">
               <div class="note-face note-front">04<br><span class="small">tap me</span></div>
               <div class="note-face note-back">
-                That's enough praise for one website. Stay humble, Crush.
+                That's enough praise for one website. Stay humble, Moti.
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section hidden" id="giftSection">
+      <div class="section-card" style="text-align:center;">
+        <div class="mini-pill">🎁 one unnecessary extra</div>
+        <h2 class="section-title">A tiny virtual gift.</h2>
+        <p class="section-sub">
+          Completely normal online-party behaviour. Do not overthink it
+          <span class="secret-dot" id="secretDot">👀</span>
+        </p>
+
+        <div class="gift-box" id="giftBox" aria-label="Open virtual gift">
+          <div class="gift-bow">🎀</div>
+          <div class="gift-lid"></div>
+          <div class="gift-base"></div>
+          <div class="gift-ribbon-v"></div>
+          <div class="gift-ribbon-h"></div>
+        </div>
+
+        <div class="gift-surprise" id="giftSurprise">
+          🧸 + 🍕 + 🥡 + 🍰<br><br>
+          <strong>Official party survival kit.</strong><br>
+          One imaginary teddy included because apparently this website needed one.
         </div>
       </div>
     </section>
@@ -651,8 +901,9 @@
     </section>
 
     <footer class="footer">
-      Made with HTML, CSS, JavaScript<br>
-      and questionable decision-making.
+      Made by K2<br>
+      On request of Moti<br>
+      for online party
     </footer>
   </main>
 
@@ -738,7 +989,7 @@
       Pastry: [
         "Pastry first? Someone has priorities 🍰",
         "Sweet choice. And no, that sentence has no hidden meaning.",
-        "One pastry for Crush. The bill is obviously on me."
+        "One pastry for Moti. The bill is obviously on me."
       ]
     };
 
@@ -806,8 +1057,9 @@
         btn.classList.add("wiggle");
 
         unlockSection("cardsSection", 650);
-        unlockSection("secretSection", 1250);
-        unlockSection("finalSection", 1850);
+        unlockSection("giftSection", 1150);
+        unlockSection("secretSection", 1650);
+        unlockSection("finalSection", 2250);
       });
     });
 
@@ -845,6 +1097,77 @@
         setTimeout(()=>c.remove(),3800);
       }
     }
+
+
+    const teddyLines = [
+      "Teddy says pizza first. Teddy is wise.",
+      "Teddy thinks pastry should count as a main course.",
+      "Teddy refuses to choose between Manchurian and pizza.",
+      "Teddy suspects this party has suspiciously good planning 👀",
+      "Teddy says: keep scrolling. Apparently there are secrets."
+    ];
+
+    document.getElementById("teddyPeek").addEventListener("click", ()=>{
+      const line = teddyLines[Math.floor(Math.random()*teddyLines.length)];
+      document.querySelector("#teddyPeek .teddy-speech").innerHTML =
+        `<strong>Teddy says:</strong><br>${line}`;
+      document.querySelector("#teddyPeek .teddy-mini").textContent =
+        ["🧸","🐻","🧸","🐻‍❄️"][Math.floor(Math.random()*4)];
+    });
+
+    let hugs = 0;
+    document.getElementById("hugBtn").addEventListener("click", ()=>{
+      hugs = Math.min(100, hugs + 20);
+      document.getElementById("hugFill").style.width = hugs + "%";
+
+      const messages = {
+        20:"20% — teddy is considering it.",
+        40:"40% — acceptable effort.",
+        60:"60% — okay, that was kinda cute.",
+        80:"80% — teddy is emotionally invested now.",
+        100:"100% — certified online-party hug 🧸💗"
+      };
+      document.getElementById("hugText").textContent = messages[hugs];
+
+      if(hugs === 100){
+        confettiBurst(20);
+        showToast("Teddy approves this party 🧸");
+      }
+    });
+
+    document.getElementById("giftBox").addEventListener("click", function(){
+      this.classList.toggle("open");
+      const surprise = document.getElementById("giftSurprise");
+      surprise.classList.toggle("show");
+      if(surprise.classList.contains("show")){
+        confettiBurst(18);
+        showToast("Tiny gift opened 🎁");
+      }
+    });
+
+    let secretTaps = 0;
+    document.getElementById("secretDot").addEventListener("click", ()=>{
+      secretTaps++;
+      const secrets = [
+        "Why are you tapping the suspicious eye?",
+        "Okay... there may be hidden things here.",
+        "Three taps? Curious.",
+        "Fine: the developer definitely spent more time on this than necessary."
+      ];
+      showToast(secrets[Math.min(secretTaps-1, secrets.length-1)]);
+    });
+
+    document.addEventListener("click", (e)=>{
+      if(e.target.closest("button, .food, .note-card, .envelope, .gift-box, .teddy-peek, .secret-dot")){
+        const paw = document.createElement("div");
+        paw.className = "paw";
+        paw.textContent = Math.random() > .5 ? "🐾" : "♡";
+        paw.style.left = (e.clientX - 6) + "px";
+        paw.style.top = (e.clientY - 6) + "px";
+        document.body.appendChild(paw);
+        setTimeout(()=>paw.remove(),950);
+      }
+    });
 
     function createFloaties(){
       const symbols = ["✦","♡","✿","⋆","✨"];
